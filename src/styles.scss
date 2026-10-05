@@ -43,6 +43,11 @@ a {
   color: var(--accent);
 }
 
+/* Intro paragraph under a page's h1. */
+.lede {
+  color: var(--text-muted);
+}
+
 code {
   font-family: ui-monospace, 'SF Mono', Menlo, monospace;
   font-size: 0.9em;

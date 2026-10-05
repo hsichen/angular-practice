@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { SideBySide } from '../../shared/side-by-side';
 import { StopwatchPractice } from './stopwatch-practice';
 import { StopwatchReference } from './stopwatch-reference';
 
 /** Route page: the finished reference and the practice copy, side by side. */
 @Component({
   selector: 'app-stopwatch',
-  imports: [StopwatchReference, StopwatchPractice],
+  imports: [SideBySide, StopwatchReference, StopwatchPractice],
   template: `
     <h1>Stopwatch</h1>
     <p class="lede">
@@ -13,32 +14,10 @@ import { StopwatchReference } from './stopwatch-reference';
       version is in <code>stopwatch-reference.ts</code>. Both run the same spec.
     </p>
 
-    <div class="versions">
-      <section aria-labelledby="stopwatch-reference-heading">
-        <h2 id="stopwatch-reference-heading">Reference</h2>
-        <app-stopwatch-reference />
-      </section>
-      <section aria-labelledby="stopwatch-practice-heading">
-        <h2 id="stopwatch-practice-heading">Your turn</h2>
-        <app-stopwatch-practice />
-      </section>
-    </div>
-  `,
-  styles: `
-    .lede {
-      color: var(--text-muted);
-    }
-
-    .versions {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
-      gap: 1.5rem;
-    }
-
-    h2 {
-      margin: 0 0 0.5rem;
-      font: var(--mat-sys-title-large);
-    }
+    <app-side-by-side>
+      <app-stopwatch-reference reference />
+      <app-stopwatch-practice practice />
+    </app-side-by-side>
   `,
 })
 export class Stopwatch {}

@@ -30,7 +30,6 @@ import { CATEGORIES, Category, EXERCISES } from '../registry';
     }
   `,
   styles: `
-    .lede,
     .blurb,
     .summary,
     .empty {
