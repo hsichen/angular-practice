@@ -1,20 +1,28 @@
-:root {
-  color-scheme: light dark;
-  --bg: #ffffff;
-  --text: #1a1a1f;
-  --text-muted: #55555f;
-  --border: #e2e2e8;
-  --accent: #c2185b;
-}
+// Material 3 theme: defines the `--mat-sys-*` CSS variables used by Material components.
+// See https://material.angular.dev/guide/theming and /guide/system-variables
+@use '@angular/material' as mat;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #121216;
-    --text: #ececf1;
-    --text-muted: #a3a3ae;
-    --border: #2c2c34;
-    --accent: #f48fb1;
-  }
+html {
+  height: 100%;
+  // `light dark` follows the OS setting; mat.theme emits light-dark() values.
+  color-scheme: light dark;
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$rose-palette,
+        tertiary: mat.$red-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+
+  // App-level aliases so non-Material styles stay in sync with the theme.
+  --bg: var(--mat-sys-surface);
+  --text: var(--mat-sys-on-surface);
+  --text-muted: var(--mat-sys-on-surface-variant);
+  --border: var(--mat-sys-outline-variant);
+  --accent: var(--mat-sys-primary);
 }
 
 *,
@@ -25,15 +33,10 @@
 
 body {
   margin: 0;
+  height: 100%;
   background: var(--bg);
   color: var(--text);
-  font-family:
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    Roboto,
-    sans-serif;
-  line-height: 1.5;
+  font: var(--mat-sys-body-large);
 }
 
 a {
