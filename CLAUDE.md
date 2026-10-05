@@ -68,11 +68,11 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 
 - The user's global CLAUDE.md teaching contract applies: predict → run → reconcile. Don't reveal an exercise's answer before they've predicted and run it.
 - `TODO` stubs in exercise files are the user's to write. Don't implement them unless asked. Review, hint, or point at failing tests instead.
-- Build exercises with a finished version use this layout (see `builds/stopwatch/`):
+- Build exercises with a finished version use this layout (see `builds/stopwatch/`, `builds/key-sequence/`):
   - `<slug>-face.ts`: shared presentational UI (`input()`/`output()`, no logic under practice)
   - `<slug>-reference.ts`: finished, commented solution. **It is a spoiler**: don't quote or summarize it while the user is still working on the practice copy, unless they ask.
   - `<slug>-practice.ts`: the same container with a stub for the user
-  - `<slug>.ts`: route page that shows both side by side
+  - `<slug>.ts`: route page; wraps both in `<app-side-by-side>` (`src/app/shared/side-by-side.ts`) using `reference` / `practice` content-projection attributes
   - `<slug>.spec.ts`: one `describe.each` suite that runs against both versions
 - Specs are the check for build exercises. Failing tests for an untouched practice stub are expected. When writing a new spec, verify it against a throwaway correct implementation (and an incorrect one) outside the repo before handing it over.
 
@@ -81,4 +81,5 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Node is pinned in `.node-version` (24.x via fnm; the shell's default Node is too old for Angular CLI 22). In non-interactive shells, run tools through `fnm exec -- npx ng ...`.
 - Angular 22 and Angular Material 22 use a Material 3 theme in `src/styles.scss`. App-level CSS tokens (`--bg`, `--text`, `--text-muted`, `--border`, `--accent`) alias `--mat-sys-*` variables. `mat-icon` defaults to the Material Symbols font (set in `app.config.ts`).
 - Tests use Vitest via `ng test`. Run a subset with `npx ng test --watch=false --filter=<regex>`, which matches suite and test names (e.g. `--filter=practice`).
+- The browser pane's automation sends a lone Ctrl keypress with an empty `key`, and scripted `.click()` on a `mat-radio-button` input doesn't select it there. Use real clicks, or verify modifier keys in specs (jsdom), rather than concluding the app is broken.
 - Dev server: the `dev` config in `.claude/launch.json`. Restart it after installing packages. If a new file isn't picked up (e.g. the registry was saved before the file existed), touch `registry.ts` to force a rebuild.

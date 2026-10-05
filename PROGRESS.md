@@ -4,10 +4,11 @@ Where each exercise stands, and what's queued. Update this when an exercise chan
 
 ## Exercises
 
-| Exercise                | Route                    | Status                                                                                                                                                                                                   |
-| ----------------------- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Route → input() binding | `/practice/route-inputs` | **Awaiting predictions.** User is to predict `id` and `tab` for links A–D, then click through. Next: reconcile against what actually rendered.                                                           |
-| Stopwatch (RxJS)        | `/builds/stopwatch`      | **Not started.** User writes `state$` in `stopwatch-practice.ts`. Done when `npx ng test --filter=practice` passes. Stretch goals: the delayed-timer test (flip `stretch: true` in the spec), then laps. |
+| Exercise                     | Route                    | Status                                                                                                                                                                                                                                             |
+| ---------------------------- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Route → input() binding      | `/practice/route-inputs` | **Awaiting predictions.** User is to predict `id` and `tab` for links A–D, then click through. Next: reconcile against what actually rendered.                                                                                                     |
+| Stopwatch (RxJS)             | `/builds/stopwatch`      | **Not started.** User writes `state$` in `stopwatch-practice.ts`. Done when `npx ng test --filter=practice` passes. Stretch goals: the delayed-timer test (flip `stretch: true` in the spec), then laps.                                           |
+| Key sequence detector (RxJS) | `/builds/key-sequence`   | **Not started.** User writes `state$` in `key-sequence-practice.ts` from `keydown$` + the `combo` signal. Done when `npx ng test --filter="KeySequence.*practice"` passes. Stretch: overlapping attempts (extra leading ↑ in Konami), then chords. |
 
 ## Backlog
 

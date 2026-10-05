@@ -57,4 +57,11 @@ export const EXERCISES: Exercise[] = [
     summary: 'RxJS: button clicks → timer state. Reference + practice copy',
     load: () => import('./builds/stopwatch/stopwatch').then((m) => m.Stopwatch),
   },
+  {
+    slug: 'key-sequence',
+    category: 'builds',
+    title: 'Key sequence detector',
+    summary: 'RxJS: recognize key combos like the Konami code. Reference + practice copy',
+    load: () => import('./builds/key-sequence/key-sequence').then((m) => m.KeySequence),
+  },
 ];

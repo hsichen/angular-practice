@@ -20,6 +20,7 @@ src/app/
   practice/        # /practice/<slug>  — focused concept drills
   interview/       # /interview/<slug> — interview-style problems
   builds/          # /builds/<slug>    — small end-to-end apps
+  shared/          # layout pieces reused across exercises (e.g. side-by-side)
 ```
 
 UI uses Angular Material (Material 3, rose-red theme in `src/styles.scss`).
