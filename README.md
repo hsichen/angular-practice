@@ -22,6 +22,8 @@ src/app/
   builds/          # /builds/<slug>    — small end-to-end apps
 ```
 
+UI uses Angular Material (Material 3, rose-red theme in `src/styles.scss`).
+
 ## Adding an exercise
 
 1. Generate the component in its category folder:
@@ -43,4 +45,11 @@ src/app/
    ```
 
 It's then routed at `/practice/signals-basics` and listed on the home page. Route params bind
-straight to `input()`s (`withComponentInputBinding` is on).
+straight to `input()`s (`withComponentInputBinding` is on); add `extraPaths: [':id']` to the entry
+to register `/practice/<slug>/:id` as well.
+
+Build exercises with a finished reference follow the `builds/stopwatch/` layout: a shared UI
+component, `-reference.ts`, `-practice.ts`, and one spec that runs against both. Run just your copy
+with `npx ng test --filter=practice`.
+
+Exercise status and upcoming topics: [PROGRESS.md](PROGRESS.md).
