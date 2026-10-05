@@ -8,6 +8,8 @@ export interface Exercise {
   category: Category;
   title: string;
   summary: string;
+  /** Extra path segments that load the same component, e.g. `[':id']` → `/practice/<slug>/:id`. */
+  extraPaths?: string[];
   load: () => Promise<Type<unknown>>;
 }
 
@@ -39,4 +41,20 @@ export const CATEGORIES: Record<Category, { label: string; blurb: string }> = {
  *     load: () => import('./practice/signals-basics/signals-basics').then((m) => m.SignalsBasics),
  *   },
  */
-export const EXERCISES: Exercise[] = [];
+export const EXERCISES: Exercise[] = [
+  {
+    slug: 'route-inputs',
+    category: 'practice',
+    title: 'Route → input() binding',
+    summary: 'withComponentInputBinding: path params, query params, defaults',
+    extraPaths: [':id'],
+    load: () => import('./practice/route-inputs/route-inputs').then((m) => m.RouteInputs),
+  },
+  {
+    slug: 'stopwatch',
+    category: 'builds',
+    title: 'Stopwatch',
+    summary: 'RxJS: button clicks → timer state. Reference + practice copy',
+    load: () => import('./builds/stopwatch/stopwatch').then((m) => m.Stopwatch),
+  },
+];

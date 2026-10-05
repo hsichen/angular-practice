@@ -9,10 +9,11 @@ export const routes: Routes = [
     title: 'Sandbox',
     loadComponent: () => import('./sandbox/sandbox').then((m) => m.Sandbox),
   },
-  ...EXERCISES.map((exercise) => ({
-    path: `${exercise.category}/${exercise.slug}`,
-    title: exercise.title,
-    loadComponent: exercise.load,
-  })),
+  ...EXERCISES.flatMap((exercise) => {
+    const base = `${exercise.category}/${exercise.slug}`;
+    return [base, ...(exercise.extraPaths ?? []).map((extra) => `${base}/${extra}`)].map(
+      (path) => ({ path, title: exercise.title, loadComponent: exercise.load }),
+    );
+  }),
   { path: '**', redirectTo: '' },
 ];
