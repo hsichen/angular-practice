@@ -1,7 +1,26 @@
 import { Component } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { Observable, Subject, of } from 'rxjs';
+import {
+  Observable,
+  Subject,
+  of,
+  tap,
+  scan,
+  map,
+  startWith,
+  switchMap,
+  mergeMap,
+  interval,
+  merge,
+} from 'rxjs';
 import { INITIAL_STATE, StopwatchFace, StopwatchState } from './stopwatch-face';
+
+interface Timing {
+  running: boolean;
+  startTimeMs: number;
+  bankedMs: number;
+}
+const STOPPED_STATE: Timing = { running: false, startTimeMs: 0, bankedMs: 0 };
 
 /**
  * Build exercise: RxJS stopwatch — your copy.
@@ -36,8 +55,46 @@ export class StopwatchPractice {
   protected readonly startPause$ = new Subject<void>();
   protected readonly reset$ = new Subject<void>();
 
-  // TODO: replace `of(INITIAL_STATE)` with a stream built from startPause$ and reset$.
-  private readonly state$: Observable<StopwatchState> = of(INITIAL_STATE);
+  private readonly state$: Observable<StopwatchState> = merge(
+    this.startPause$.pipe(map(() => 'startPause' as const)),
+    this.reset$.pipe(map(() => 'reset' as const)),
+  ).pipe(
+    scan((acc, command) => {
+      if (command === 'reset') {
+        // RESET
+        return STOPPED_STATE;
+      }
+
+      // default branch is startPaus
+      if (acc.running) {
+        // PAUSE
+        // stop the timer and calculate the elapsed time -
+        // which the incrementally banked time + total already-accumulated time
+        return {
+          ...acc,
+          running: false,
+          bankedMs: acc.bankedMs + (Date.now() - acc.startTimeMs),
+        };
+      } else {
+        // START
+        // start the timer, setting the start time to now
+        return { ...acc, running: true, startTimeMs: Date.now() };
+      }
+    }, STOPPED_STATE),
+    switchMap((timing) =>
+      timing.running
+        ? interval(10).pipe(
+            map(() => ({
+              running: true,
+              elapsedMs: timing.bankedMs + Date.now() - timing.startTimeMs,
+            })),
+            startWith({ running: true, elapsedMs: timing.bankedMs }),
+          )
+        : of({ running: false, elapsedMs: timing.bankedMs }),
+    ),
+
+    // tap((state) => console.log('state$ emitted', state)),
+  );
 
   protected readonly state = toSignal(this.state$, { initialValue: INITIAL_STATE });
 }

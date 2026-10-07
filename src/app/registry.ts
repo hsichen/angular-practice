@@ -51,6 +51,14 @@ export const EXERCISES: Exercise[] = [
     load: () => import('./practice/route-inputs/route-inputs').then((m) => m.RouteInputs),
   },
   {
+    slug: 'signal-forms-basics',
+    category: 'practice',
+    title: 'Signal Forms 1 · Model and fields',
+    summary: 'form(), [formField], and who owns the value',
+    load: () =>
+      import('./practice/signal-forms-basics/signal-forms-basics').then((m) => m.SignalFormsBasics),
+  },
+  {
     slug: 'stopwatch',
     category: 'builds',
     title: 'Stopwatch',

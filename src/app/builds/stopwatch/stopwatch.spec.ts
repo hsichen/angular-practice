@@ -8,7 +8,7 @@ import { StopwatchReference } from './stopwatch-reference';
 describe.each([
   { name: 'reference', component: StopwatchReference as Type<unknown>, stretch: true },
   // Flip `stretch` to true when you attempt the stretch goal.
-  { name: 'practice', component: StopwatchPractice as Type<unknown>, stretch: false },
+  { name: 'practice', component: StopwatchPractice as Type<unknown>, stretch: true },
 ])('Stopwatch ($name)', ({ component, stretch }) => {
   let fixture: ComponentFixture<unknown>;
   let el: HTMLElement;
