@@ -72,4 +72,12 @@ export const EXERCISES: Exercise[] = [
     summary: 'RxJS: recognize key combos like the Konami code. Reference + practice copy',
     load: () => import('./builds/key-sequence/key-sequence').then((m) => m.KeySequence),
   },
+  {
+    slug: 'payment-flow',
+    category: 'builds',
+    title: 'Payment flow',
+    summary:
+      'RxJS: dialog steps composed at launch from an account check. Reference + practice copy',
+    load: () => import('./builds/payment-flow/payment-flow').then((m) => m.PaymentFlow),
+  },
 ];
