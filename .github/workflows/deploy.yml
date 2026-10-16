@@ -1,0 +1,47 @@
+# Builds the app and publishes it to GitHub Pages on every push to main.
+# Live at https://hsichen.github.io/angular-practice/
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only the latest push deploys; a newer one cancels an in-flight run.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+      - run: npm ci
+      # A project site is served from /angular-practice/, not the domain root.
+      - run: npx ng build --base-href /angular-practice/
+      # Pages has no SPA fallback, so unknown paths (deep links, refreshes) get 404.html.
+      # Making it a copy of index.html lets the Angular router resolve them instead.
+      - run: cp dist/angular-practice/browser/index.html dist/angular-practice/browser/404.html
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist/angular-practice/browser
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

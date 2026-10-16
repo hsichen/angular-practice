@@ -2,6 +2,9 @@
 
 Personal playground for Angular 22: concept drills, interview questions, and quick builds.
 
+Live demo: https://hsichen.github.io/angular-practice/ (deployed from `main` by
+`.github/workflows/deploy.yml`).
+
 Node is pinned in `.node-version` (fnm switches to it automatically on `cd`).
 
 ```bash
