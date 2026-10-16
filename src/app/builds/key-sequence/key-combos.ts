@@ -31,6 +31,7 @@ export const COMBOS: KeyCombo[] = [
     label: 'Arrow circle',
     keys: ['ArrowUp', 'ArrowRight', 'ArrowDown', 'ArrowLeft'],
   },
+  { id: 'f10', label: 'F10 X', keys: ['F10', 'x'] },
 ];
 
 /**

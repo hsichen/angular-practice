@@ -23,7 +23,7 @@ const KONAMI = [
 describe.each([
   { name: 'reference', component: KeySequenceReference as Type<unknown>, stretch: true },
   // Flip `stretch` to true when you attempt the stretch goal.
-  { name: 'practice', component: KeySequencePractice as Type<unknown>, stretch: false },
+  { name: 'practice', component: KeySequencePractice as Type<unknown>, stretch: true },
 ])('KeySequence ($name)', ({ component, stretch }) => {
   let fixture: ComponentFixture<unknown>;
   let el: HTMLElement;
